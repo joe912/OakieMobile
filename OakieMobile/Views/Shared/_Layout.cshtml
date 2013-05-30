@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title</title>
+        <meta name="viewport" content="width=device-width" />
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        @Styles.Render("~/Content/mobileCss", "~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <div data-role="page" data-theme="b">
+            <div data-role="header">
+                @if (IsSectionDefined("Header"))
+                {
+                    @RenderSection("Header")
+                }
+                else
+                {
+                    <h1>@ViewBag.Title</h1>
+@*                    @Html.Partial("_LoginPartial")*@
+                    <a href="@Url.Content("~")" id="current" data-icon="home" data-iconpos="notext">Home</a>
+                    <div data-role="navbar">
+                        <ul>
+                            <li><a href="@Url.Content("~/Home/NextMatch")">Next Match</a></li>
+                            <li><a href="@Url.Content("~/Home/Fixtures")">Fixtures</a></li>
+                            <li><a href="@Url.Content("~/Home/Contact")">Contact</a></li>
+                            <li><a href="@Url.Content("~/Home/About")">About</a></li>
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div data-role="content">
+                @RenderBody()
+            </div>
+            <div data-role="footer">
+                <a href="http://www.oakiegs.com">View the full Oakie website</a>
+            </div>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        <script>
+            $(document).on("mobileinit", function () {
+                $.mobile.ajaxEnabled = true;
+            });
+        </script>
+        @Scripts.Render("~/bundles/jquerymobile")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>
